@@ -1,10 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function App() {
+  const [name, setName] = useState();
+  const [show, isShow] = useState(false);
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      {show && <Text>Hello World {name} !</Text>}
+      {!show && (
+        <>
+          <TextInput
+            style={styles.input}
+            onChangeText={(val) => setName(val)}
+          /> 
+        </>
+      )}
+      <Button title="Click Here" onPress={() => isShow(!show)}></Button>
       <StatusBar style="auto" />
     </View>
   );
@@ -13,8 +25,15 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  input: {
+    borderColor: "#777",
+    padding: 8,
+    borderWidth: 1,
+    width: 200,
+    height: 30,
   },
 });
